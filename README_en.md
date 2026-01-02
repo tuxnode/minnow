@@ -3,15 +3,9 @@ NetworkDIY
 
 [中文说明 (Chinese Version)](./README.md)
 
-While learning Computer Networking, I came across two courses: CS168 and CS144. My original plan was to take CS144 to learn both networking and modern C++ simultaneously. However, I found the available CS144 lecture videos a bit dated, and the official notes felt somewhat scattered.
+This is a hybrid learning path combining CS144 and CS168. CS168 offers up-to-date online textbooks and lecture videos with engaging instructors, while CS144 provides assignments based on modern C++. Therefore, this path satisfies the needs of learning both computer networking and modern C++.
 
-Turning to CS168, I found its learning materials extremely well-organized. The accompanying online textbook is comprehensive, concise, and vivid. The lecture videos are up-to-date, and the instructor is humorous and engaging. The only downside was that CS168 primarily uses Python, which didn't fit my goal of mastering modern C++.
-
-So I thought: Can I study using the CS168 materials but do the CS144 Labs? 
-
-Practice proved this to be a feasible path. I have listed the resources used and my study schedule below for reference.
-
-The CS144 Fall 2025 starter code is also backed up in this repository and the lab handouts are placed in the [handouts](./handouts/) folder. I hope this helps you.
+The starter code for CS144 Fall 2025 is backed up in this repository, and the lab handouts can be found in the [handouts](./handouts/) directory. I hope this helps you.
 
 | Resource | Link |
 | :--- | :--- |
