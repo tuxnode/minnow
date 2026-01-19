@@ -6,23 +6,23 @@
 #include <span>
 #include <string>
 
-using std::string;
-using std::cout;
 using std::cerr;
+using std::cout;
+using std::string;
 
 void get_URL( const string& host, const string& path )
 {
-  TCPSocket socket{};
-  socket.connect(Address(host, "http"));
+  TCPSocket socket {};
+  socket.connect( Address( host, "http" ) );
   string data_send = "GET " + path + " HTTP/1.1\r\nHost: " + host + "\r\n" + "Connection: close\r\n\r\n";
-  socket.write(data_send);
-  while (!socket.eof()) {
+  socket.write( data_send );
+  while ( !socket.eof() ) {
     string result;
-    socket.read(result);
+    socket.read( result );
     cout << result;
   }
   socket.close();
-  
+
   // cerr << "Function called: get_URL(" << host << ", " << path << ")\n";
   // cerr << "Warning: get_URL() has not been implemented yet.\n";
 }

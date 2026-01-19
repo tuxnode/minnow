@@ -9,7 +9,9 @@ class Reassembler
 {
 public:
   // Construct Reassembler to write into given ByteStream.
-  explicit Reassembler( ByteStream&& output ) : output_( std::move( output ) ) , buffer_(output_.writer().available_capacity()) {}
+  explicit Reassembler( ByteStream&& output )
+    : output_( std::move( output ) ), buffer_( output_.writer().available_capacity() )
+  {}
 
   /*
    * Insert a new substring to be reassembled into a ByteStream.
@@ -46,10 +48,10 @@ public:
 
 private:
   ByteStream output_;
-  bool eof_{};
-  size_t unassembler_bytes_{};
-  size_t next_index_{};
-  size_t eof_index_{};
+  bool eof_ {};
+  size_t unassembler_bytes_ {};
+  size_t next_index_ {};
+  size_t eof_index_ {};
   std::vector<std::optional<char>> buffer_;
 
   void flush();
