@@ -27,4 +27,6 @@ public:
 
 private:
   Reassembler reassembler_;
+  std::optional<Wrap32> isn_ {}; // 记录初始序列号
+  bool synced_ {};               // 是否收到sycn
 };
