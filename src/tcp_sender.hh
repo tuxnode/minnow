@@ -4,6 +4,8 @@
 #include "tcp_receiver_message.hh"
 #include "tcp_sender_message.hh"
 
+#include <cstdint>
+#include <deque>
 #include <functional>
 
 class TCPSender
@@ -40,6 +42,20 @@ private:
   Reader& reader() { return input_.reader(); }
 
   ByteStream input_;
-  Wrap32 isn_;
+  Wrap32 isn_;                     // 记录初始化序列号
+  uint64_t next_seqno_ {};         // 期望的下个序号
+  uint64_t acknowledged_seqno_ {}; // 已经被对方确认的最大序列号
+  uint64_t window_size_ { 1 };     // 临时存储窗口大小
+
+  bool syn_send_ {};
+  bool fin_send_ {};
+
+  // 计时器需要
   uint64_t initial_RTO_ms_;
+  bool time_runnning_ {}; // 是否开启计时器
+  uint64_t timer_ms_ {};
+  uint64_t resend_count_ {}; // 维护连续重传次数，决定等待时间
+  uint64_t current_RTO_ms_ { initial_RTO_ms_ };
+
+  std::deque<TCPSenderMessage> segment_ {}; // 等待确认队列
 };
