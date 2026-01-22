@@ -2,10 +2,14 @@
 
 #include "address.hh"
 #include "ethernet_frame.hh"
+#include "ethernet_header.hh"
 #include "ipv4_datagram.hh"
 
+#include <cstddef>
+#include <cstdint>
 #include <memory>
 #include <queue>
+#include <unordered_map>
 
 // A "network interface" that connects IP (the internet layer, or network layer)
 // with Ethernet (the network access layer, or link layer).
@@ -82,4 +86,20 @@ private:
 
   // Datagrams that have been received
   std::queue<InternetDatagram> datagrams_received_ {};
+
+  struct ArpEntry
+  {
+    EthernetAddress mac;
+    size_t ttl_ms;
+  };
+
+  struct Pending
+  {
+    InternetDatagram datagrame;
+    size_t age_ms;
+  };
+
+  std::unordered_map<uint32_t, ArpEntry> arp_catch_ {}; // 维护一个arp缓存
+  std::unordered_map<uint32_t, size_t> arp_request_cooldown_ms_ {};
+  std::unordered_map<uint32_t, std::vector<Pending>> pending_by_ip_ {}; // 等待发送队列
 };
