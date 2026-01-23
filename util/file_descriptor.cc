@@ -68,7 +68,7 @@ FileDescriptor::FDWrapper::~FDWrapper()
 FileDescriptor::FileDescriptor( int fd ) : internal_fd_( make_shared<FDWrapper>( fd ) ) {}
 
 // Private constructor used by duplicate()
-FileDescriptor::FileDescriptor( shared_ptr<FDWrapper> other_shared_ptr ) : internal_fd_( move( other_shared_ptr ) )
+FileDescriptor::FileDescriptor( shared_ptr<FDWrapper> other_shared_ptr ) : internal_fd_( std::move( other_shared_ptr ) )
 {}
 
 // returns a copy of this FileDescriptor

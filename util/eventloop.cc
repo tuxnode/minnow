@@ -23,7 +23,7 @@ size_t EventLoop::add_category( const string& name )
 }
 
 EventLoop::BasicRule::BasicRule( size_t s_category_id, InterestT s_interest, CallbackT s_callback )
-  : category_id( s_category_id ), interest( move( s_interest ) ), callback( move( s_callback ) )
+  : category_id( s_category_id ), interest( std::move( s_interest ) ), callback( std::move( s_callback ) )
 {}
 
 EventLoop::FDRule::FDRule( BasicRule&& base,
@@ -31,11 +31,11 @@ EventLoop::FDRule::FDRule( BasicRule&& base,
                            Direction s_direction,
                            CallbackT s_cancel,
                            CallbackT s_error )
-  : BasicRule( move( base ) )
-  , fd( move( s_fd ) )
+  : BasicRule( std::move( base ) )
+  , fd( std::move( s_fd ) )
   , direction( s_direction )
-  , cancel( move( s_cancel ) )
-  , error( move( s_error ) )
+  , cancel( std::move( s_cancel ) )
+  , error( std::move( s_error ) )
 {}
 
 EventLoop::RuleHandle EventLoop::add_rule( size_t category_id,

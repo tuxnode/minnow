@@ -76,11 +76,11 @@ void Parser::BufferList::dump_all( vector<Ref<std::string>>& out )
   if ( skip_ ) {
     out.emplace_back( buffer_.front()->substr( skip_ ) );
   } else {
-    out.push_back( move( buffer_.front() ) );
+    out.push_back( std::move( buffer_.front() ) );
   }
   buffer_.pop_front();
   for ( auto&& x : buffer_ ) {
-    out.emplace_back( move( x ) );
+    out.emplace_back( std::move( x ) );
   }
 }
 
@@ -133,7 +133,7 @@ void Parser::concatenate_all_remaining( std::string& out )
 void Serializer::flush()
 {
   if ( not buffer_.empty() ) {
-    output_.emplace_back( move( buffer_ ) );
+    output_.emplace_back( std::move( buffer_ ) );
     buffer_.clear();
   }
 }
@@ -142,7 +142,7 @@ void Serializer::buffer( string buf )
 {
   if ( not buf.empty() ) {
     flush();
-    output_.emplace_back( move( buf ) );
+    output_.emplace_back( std::move( buf ) );
   }
 }
 
@@ -150,7 +150,7 @@ void Serializer::buffer( Ref<string> buf )
 {
   if ( not buf.get().empty() ) {
     flush();
-    output_.emplace_back( move( buf ) );
+    output_.emplace_back( std::move( buf ) );
   }
 }
 
@@ -164,5 +164,5 @@ void Serializer::buffer( const vector<Ref<string>>& bufs )
 vector<Ref<string>> Serializer::finish()
 {
   flush();
-  return move( output_ );
+  return std::move( output_ );
 }

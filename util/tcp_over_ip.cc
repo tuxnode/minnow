@@ -42,7 +42,7 @@ optional<TCPMessage> TCPOverIPv4Adapter::unwrap_tcp_in_ip( InternetDatagram ip_d
 
   // is the payload a valid TCP segment?
   TCPSegment tcp_seg;
-  if ( not parse( tcp_seg, move( ip_dgram.payload ), ip_dgram.header.pseudo_checksum() ) ) {
+  if ( not parse( tcp_seg, std::move( ip_dgram.payload ), ip_dgram.header.pseudo_checksum() ) ) {
     return {};
   }
 
@@ -68,7 +68,7 @@ optional<TCPMessage> TCPOverIPv4Adapter::unwrap_tcp_in_ip( InternetDatagram ip_d
     return {};
   }
 
-  return move( tcp_seg.message );
+  return std::move( tcp_seg.message );
 }
 
 //! Takes a TCP segment, sets port numbers as necessary, and wraps it in an IPv4 datagram

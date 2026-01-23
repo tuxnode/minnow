@@ -11,8 +11,8 @@ optional<TCPMessage> TCPOverIPv4OverTunFdAdapter::read()
   _tun.read( strs );
 
   InternetDatagram ip_dgram;
-  if ( parse( ip_dgram, move( strs ) ) ) {
-    return unwrap_tcp_in_ip( move( ip_dgram ) );
+  if ( parse( ip_dgram, std::move( strs ) ) ) {
+    return unwrap_tcp_in_ip( std::move( ip_dgram ) );
   }
   return {};
 }
