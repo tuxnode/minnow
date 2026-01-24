@@ -21,6 +21,8 @@ To run clang-tidy (which suggests improvements): `cmake --build build --target t
 
 To format code: `cmake --build build --target format`
 
+*当前已经全部通过Lab0 - Lab6的测试*
+
 [学习路线](./README_Net.md)
 
 个人实现[博客](https://tuxnode.fun)
